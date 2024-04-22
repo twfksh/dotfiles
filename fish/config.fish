@@ -1,4 +1,4 @@
-fish_add_path -g /home/toufiq/.local/bin /usr/bin /usr/sbin /home/linuxbrew/.linuxbrew/bin /usr/local/go/bin /usr/lib
+fish_add_path -g /home/toufiq/.local/bin /usr/bin /usr/sbin /home/linuxbrew/.linuxbrew/bin /usr/local/go/bin /home/toufiq/go/bin /usr/lib
 
 zoxide init fish | source
 
