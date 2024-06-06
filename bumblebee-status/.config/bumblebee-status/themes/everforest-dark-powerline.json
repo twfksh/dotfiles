@@ -1,0 +1,32 @@
+{
+    "icons": [ "ascii" ], 
+    "defaults": {
+        "separator-block-width": 0,
+        "warning": {
+            "fg": "#d3c6aa",
+            "bg": "#2d353b"
+        },
+        "critical": {
+            "fg": "#d3c6aa",
+            "bg": "#BF616A"
+        }
+    },
+    "cycle": [
+        { "fg":"#83c092", "bg":"#2d353b" },
+        { "fg":"#2d353b", "bg":"#83c092" }
+    ],
+    "pomodoro": {
+        "paused": {
+            "fg": "#d3c6aa",
+            "bg": "#BF616A"
+        },
+        "work": {
+            "fg": "#2d353b",
+            "bg": "#83c092"
+        },
+        "break": {
+            "fg": "#d3c6aa",
+            "bg": "#BF616A"
+        }
+    }
+}

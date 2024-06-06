@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # Font
-font pango:MesloLGS NF 8
+font pango:Iosevka Nerd Font 12
 
 # Run XDG autostart
 exec --no-startup-id dex --autostart --environment i3
@@ -178,14 +178,14 @@ bar {
     mode dock
     tray_output primary
     tray_padding 4
-    font pango:Iosevka 12
-    separator_symbol " "
+    font pango:Iosevka Nerd Font 12
+    separator_symbol "|"
     strip_workspace_numbers yes
-    # status_command i3bar
+    # status_command i3blocks
     status_command /usr/bin/bumblebee-status \
-        -m cpu2 cpu pasink pomodoro date time \
-        -p cpu2.layout="cpu2.coresload" \
-        -t default
+        -m title cpu2 pasink pomodoro datetime \
+        -p cpu2.layout="cpu2.coresload" datetime.format="%d %b %Y, %a %H:%M" \
+        -t everforest-dark-powerline
     colors {
       background #2d353b
       statusline #d3c6aa
