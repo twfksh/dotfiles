@@ -209,9 +209,13 @@ client.urgent #2b3339 #BF616A #d3c6aa #BF616A
 
 client.background       #2d353b
 
+# Hotkeys
+# bindsym $mod+Shift+x exec --no-startup-id i3lock -i /media/drives/files/wallpapers-main/everforest/close_up/flowers.png
+bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -l dim
+
 # Apolication keybindings
 bindsym $mod+m exec --no-startup-id alacritty -e '/usr/bin/nvim'
-# bindsym $mod+b exec --no-startup-id librewolf
+bindsym $mod+b exec --no-startup-id brave
 # bindsym $mod+n exec --no-startup-id mailspring
 bindsym $mod+e exec --no-startup-id nemo
 # bindsym $mod+v exec --no-startup-id celluloid
