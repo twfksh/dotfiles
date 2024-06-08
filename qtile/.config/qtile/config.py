@@ -6,9 +6,8 @@
 import os
 import subprocess
 
-from libqtile import bar, hook, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, hook
-from libqtile.dgroups import simple_key_binder
+from libqtile import bar, hook, layout, widget
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, hook
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -123,7 +122,7 @@ keys = [
 
 
 # GROUPS Specs
-groups = [Group(i) for i in "1234567"]
+groups = [Group(i) for i in "123456789"]
 
 for i in groups:
     keys.extend(
@@ -256,25 +255,25 @@ def init_widgets_list():
             background=colors[1],
             padding=2,
         ),
-        #####
-        widget.TextBox(
-            text="",
-            background=colors[1],
-            foreground=colors[2],
-            padding=0,
-            fontsize=50,
-        ),
-        widget.CPU(
-            foreground=colors[0],
-            background=colors[2],
-        ),
-        widget.TextBox(
-            text="",
-            background=colors[2],
-            foreground=colors[1],
-            padding=0,
-            fontsize=50,
-        ),
+        # #####
+        # widget.TextBox(
+        #     text="",
+        #     background=colors[1],
+        #     foreground=colors[2],
+        #     padding=0,
+        #     fontsize=50,
+        # ),
+        # widget.CPU(
+        #     foreground=colors[0],
+        #     background=colors[2],
+        # ),
+        # widget.TextBox(
+        #     text="",
+        #     background=colors[2],
+        #     foreground=colors[1],
+        #     padding=0,
+        #     fontsize=50,
+        # ),
         #####
         widget.TextBox(
             text="",
@@ -286,7 +285,7 @@ def init_widgets_list():
         widget.Net(
             foreground=colors[0],
             background=colors[2],
-            format=" {down}   {up}",
+            format=" {down:.0f}{down_suffix}   {up:.0f}{up_suffix}",
         ),
         widget.TextBox(
             text="",
@@ -303,10 +302,10 @@ def init_widgets_list():
             padding=0,
             fontsize=50,
         ),
-        widget.ThermalSensor(
+        widget.CPU(
             foreground=colors[0],
             background=colors[5],
-            format="  {temp:.1f}{unit} ",
+            # format="  {temp:.1f}{unit} ",
         ),
         widget.Sep(linewidth=0, padding=0, background=colors[5]),
         widget.TextBox(
@@ -375,7 +374,7 @@ def init_widgets_list():
                 "Button1": lazy.spawn("bash -c '~/.config/rofi/scripts/power'")
             },
         ),
-        widget.Sep(linewidth=0, padding=5, background=colors[3]),
+        widget.Sep(linewidth=0, padding=0, background=colors[3]),
     ]
     return widgets_list
 
