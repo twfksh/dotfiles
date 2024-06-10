@@ -7,7 +7,7 @@ import os
 import subprocess
 
 from libqtile import bar, hook, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, hook
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -32,6 +32,9 @@ def init_colors():
         ["#46d9ff", "#46d9ff"],
         ["#a9a1e1", "#a9a1e1"],
         ["#7A8478", "#7A8478"],
+        ["#3D484D", "#3D484D"],
+        ["#475258", "#475258"],
+        ["#3A515D", "#3A515D"],
     ]
 
 
@@ -185,7 +188,6 @@ widget_defaults = dict(
     padding=4,
     background=colors[0],
 )
-extension_defaults = widget_defaults.copy()
 
 
 def init_widgets_list():
@@ -255,25 +257,6 @@ def init_widgets_list():
             background=colors[1],
             padding=2,
         ),
-        # #####
-        # widget.TextBox(
-        #     text="",
-        #     background=colors[1],
-        #     foreground=colors[2],
-        #     padding=0,
-        #     fontsize=50,
-        # ),
-        # widget.CPU(
-        #     foreground=colors[0],
-        #     background=colors[2],
-        # ),
-        # widget.TextBox(
-        #     text="",
-        #     background=colors[2],
-        #     foreground=colors[1],
-        #     padding=0,
-        #     fontsize=50,
-        # ),
         #####
         widget.TextBox(
             text="",
@@ -357,24 +340,25 @@ def init_widgets_list():
         ),
         widget.Sep(linewidth=0, padding=0, background=colors[4]),
         #####
-        widget.TextBox(
-            text="",
-            background=colors[1],
-            foreground=colors[3],
-            padding=0,
-            fontsize=50,
-        ),
+        # widget.TextBox(
+        #     text="",
+        #     background=colors[1],
+        #     foreground=colors[3],
+        #     padding=0,
+        #     fontsize=50,
+        # ),
         widget.Image(
-            filename="~/.config/qtile/icons/on-off-button.png",
+            filename="~/.config/qtile/icons/switch.png",
             scale="False",
-            margin=8,
-            foreground=colors[2],
-            background=colors[3],
+            margin=2,
+            foreground=colors[1],
+            background=colors[1],
             mouse_callbacks={
-                "Button1": lazy.spawn("bash -c '~/.config/rofi/scripts/power'")
+                # "Button1": lazy.spawn("bash -c '~/.config/rofi/scripts/power'")
+                "Button1": lazy.spawn("bash -c 'eww open powermenu'")
             },
         ),
-        widget.Sep(linewidth=0, padding=0, background=colors[3]),
+        widget.Sep(linewidth=0, padding=5, background=colors[1]),
     ]
     return widgets_list
 
