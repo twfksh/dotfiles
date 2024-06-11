@@ -1,55 +1,31 @@
-#   Qtile Configuration
-#   Author: Toufiq A. Shishir
-#   Date  : 2024-06-08 Sat 12:36 AM
-
+# Qtile WM Config [toufiq7r]
 
 import os
 import subprocess
 
-from libqtile import bar, hook, layout, widget
+from colors import gruvbox
+from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-# Variables
-mod, mod1, mod2 = "mod4", "alt", "control"
-home = os.path.expanduser("~")
-browser, file_manager = "brave", "thunar"
-terminal = guess_terminal()
+mod, mod1 = "mod4", "alt"
+terminal, browser, file_manager = "alacritty --class alacritty", "brave", "thunar"
 
 
-# COLORS Specs
-def init_colors():
-    return [
-        ["#232A2E", "#232A2E"],  # bg_dim
-        ["#343F44", "#343F44"],  # bg1
-        ["#D3C6AA", "#D3C6AA"],
-        ["#E67E80", "#E67E80"],
-        ["#83c092", "#83c092"],  # aqua
-        ["#E69875", "#E69875"],
-        ["#7FBBB3", "#7FBBB3"],
-        ["#D699B6", "#D699B6"],
-        ["#46d9ff", "#46d9ff"],
-        ["#a9a1e1", "#a9a1e1"],
-        ["#7A8478", "#7A8478"],
-        ["#3D484D", "#3D484D"],
-        ["#475258", "#475258"],
-        ["#3A515D", "#3A515D"],
-    ]
+colors = gruvbox()
 
-
-colors = init_colors()
-
-
-# KEYBINDING Specs
 keys = [
-    # Change focus
+    # A list of available commands that can be bound to keys can be found
+    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
+    # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    # Move windows
+    # Move windows between left/right columns or move up/down in current stack.
+    # Moving out of range in Columns layout will create new column.
     Key(
         [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
     ),
@@ -61,7 +37,8 @@ keys = [
     ),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    # Grow/Shrink focused windows
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
     Key(
         [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
@@ -69,14 +46,22 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    # Toggle between split and unsplit sides of stack
+    # Toggle between split and unsplit sides of stack.
+    # Split = all windows displayed
+    # Unsplit = 1 window displayed, like Max layout, but still with
+    # multiple stack panes
     Key(
         [mod, "shift"],
         "Return",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key(
+        [mod],
+        "Return",
+        lazy.spawn(terminal),
+        desc="Launch terminal",
+    ),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -123,9 +108,48 @@ keys = [
     Key([mod], "s", lazy.spawn("flameshot gui"), desc="Screenshot"),
 ]
 
+# Add key bindings to switch VTs in Wayland.
+# We can't check qtile.core.name in default config as it is loaded before qtile is started
+# We therefore defer the check until the key binding is run by using .when(func=...)
+for vt in range(1, 8):
+    keys.append(
+        Key(
+            ["control", "mod1"],
+            f"f{vt}",
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            desc=f"Switch to VT{vt}",
+        )
+    )
 
-# GROUPS Specs
-groups = [Group(i) for i in "123456789"]
+groups = [
+    Group("1", label="Term", matches=[Match(wm_class="alacritty")]),
+    Group("2", label="Browser", matches=[Match(wm_class="brave-browser")]),
+    Group("3", label="File Browser", matches=[Match(wm_class="thunar")]),
+    Group(
+        "4",
+        label="4",
+    ),
+    Group(
+        "5",
+        label="5",
+    ),
+    Group(
+        "6",
+        label="6",
+    ),
+    Group(
+        "7",
+        label="7",
+    ),
+    Group(
+        "8",
+        label="8",
+    ),
+    Group(
+        "9",
+        label="9",
+    ),
+]
 
 for i in groups:
     keys.extend(
@@ -142,239 +166,124 @@ for i in groups:
                 [mod, "shift"],
                 i.name,
                 lazy.window.togroup(i.name, switch_group=True),
-                lazy.group[i.name].toscreen(),
                 desc="Switch to & move focused window to group {}".format(i.name),
             ),
             # mod1 + tab switch to next group
-            Key(["mod1"], "Tab", lazy.screen.next_group()),
+            Key(["mod1"], "Tab", lazy.screen.next_group(skip_empty=True)),
             # mod1 + shift + tab switch to previous group
-            Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
+            Key(["mod1", "shift"], "Tab", lazy.screen.prev_group(skip_empty=True)),
         ]
     )
 
-
-# LAYOUTS Specs
-def init_layout_theme():
-    return {
-        "margin": 5,
-        "single_margin": None,
-        "border_width": 1,
-        "single_border_width": None,
-        "border_focus": colors[4],
-        "border_normal": colors[1],
-    }
-
-
-layout_theme = init_layout_theme()
-
-layouts = [
-    # layout.MonadTall(margin=8, border_width=2, border_focus="#5e81ac", border_normal="#4c566a"),
-    layout.MonadTall(**layout_theme),
-    # layout.Columns(**layout_theme),
-    # layout.MonadWide(margin=8, border_width=2, border_focus="#5e81ac", border_normal="#4c566a"),
-    layout.MonadWide(**layout_theme),
-    layout.Matrix(**layout_theme),
-    # layout.Bsp(**layout_theme),
-    # layout.Floating(**layout_theme),
-    # layout.RatioTile(**layout_theme),
-    # layout.Max(**layout_theme)
-]
-
-
-# BAR/WIDGETS Specs
-widget_defaults = dict(
-    font="Iosevka",
-    fontsize=14,
-    padding=4,
-    background=colors[0],
+layout_config = dict(
+    border_focus=colors["border1"],
+    border_width=2,
+    margin=5,
 )
 
+layouts = [
+    # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    # layout.Max(),
+    # Try more layouts by unleashing below layouts.
+    # layout.Stack(num_stacks=2),
+    # layout.Bsp(),
+    layout.MonadTall(**layout_config),
+    layout.MonadWide(**layout_config),
+    layout.Matrix(**layout_config),
+    # layout.RatioTile(),
+    # layout.Tile(),
+    # layout.TreeTab(),
+    # layout.VerticalTile(),
+    # layout.Zoomy(),
+]
 
-def init_widgets_list():
-    widgets_list = [
-        widget.Sep(
-            linewidth=0,
-            padding=4,
-            foreground=colors[1],
-            background=colors[1],
-        ),
-        widget.Image(
-            filename="~/.config/qtile/icons/archlinux_green.png",
-            scale="False",
-            margin=3,
-            foreground=colors[2],
-            background=colors[1],
-            mouse_callbacks={"Button1": lazy.spawn("rofi -show drun")},
-        ),
-        widget.Sep(linewidth=0, padding=18, foreground=colors[1], background=colors[1]),
-        widget.GroupBox(
-            font="Iosevka",
-            fontsize=14,
-            margin_y=3,
-            margin_x=0,
-            padding_y=5,
-            padding_x=3,
-            borderwidth=3,
-            active=colors[4],
-            inactive=colors[2],
-            rounded=True,
-            highlight_color=colors[1],
-            highlight_method="line",
-            this_current_screen_border=colors[4],
-            other_current_screen_border=colors[4],
-            foreground=colors[2],
-            background=colors[1],
-        ),
-        widget.TextBox(
-            text="|",
-            font="Iosevka",
-            background=colors[1],
-            foreground=colors[2],
-            padding=0,
-            fontsize=50,
-        ),
-        widget.CurrentLayoutIcon(
-            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
-            background=colors[1],
-            padding=3,
-            scale=0.45,
-        ),
-        widget.CurrentLayout(
-            foreground=colors[7],
-            background=colors[1],
-            padding=5,
-        ),
-        widget.TextBox(
-            text="|",
-            font="Iosevka",
-            background=colors[1],
-            foreground=colors[2],
-            padding=0,
-            fontsize=50,
-        ),
-        widget.WindowName(
-            foreground=colors[2],
-            background=colors[1],
-            padding=2,
-        ),
-        #####
-        widget.TextBox(
-            text="",
-            background=colors[1],
-            foreground=colors[2],
-            padding=0,
-            fontsize=50,
-        ),
-        widget.Net(
-            foreground=colors[0],
-            background=colors[2],
-            format=" {down:.0f}{down_suffix}   {up:.0f}{up_suffix}",
-        ),
-        widget.TextBox(
-            text="",
-            background=colors[2],
-            foreground=colors[1],
-            padding=0,
-            fontsize=50,
-        ),
-        #####
-        widget.TextBox(
-            text="",
-            background=colors[1],
-            foreground=colors[5],
-            padding=0,
-            fontsize=50,
-        ),
-        widget.CPU(
-            foreground=colors[0],
-            background=colors[5],
-            # format="  {temp:.1f}{unit} ",
-        ),
-        widget.Sep(linewidth=0, padding=0, background=colors[5]),
-        widget.TextBox(
-            text="",
-            background=colors[5],
-            foreground=colors[1],
-            padding=0,
-            fontsize=50,
-        ),
-        #####
-        widget.TextBox(
-            text="",
-            background=colors[1],
-            foreground=colors[6],
-            padding=0,
-            fontsize=50,
-        ),
-        widget.Volume(
-            foreground=colors[0],
-            background=colors[6],
-            fmt="VOL: {}",
-            emoji=False,
-            emoji_list=[" ", " ", " ", " "],
-        ),
-        widget.TextBox(
-            text="",
-            background=colors[6],
-            foreground=colors[1],
-            padding=0,
-            fontsize=50,
-        ),
-        #####
-        widget.TextBox(
-            text="",
-            background=colors[1],
-            foreground=colors[4],
-            padding=0,
-            fontsize=50,
-        ),
-        widget.Clock(
-            foreground=colors[1], background=colors[4], format="%d %b, %a %I:%M %p"
-        ),
-        widget.TextBox(
-            text="",
-            background=colors[4],
-            foreground=colors[1],
-            padding=0,
-            fontsize=50,
-        ),
-        widget.Sep(linewidth=0, padding=0, background=colors[4]),
-        #####
-        # widget.TextBox(
-        #     text="",
-        #     background=colors[1],
-        #     foreground=colors[3],
-        #     padding=0,
-        #     fontsize=50,
-        # ),
-        widget.Image(
-            filename="~/.config/qtile/icons/switch.png",
-            scale="False",
-            margin=2,
-            foreground=colors[1],
-            background=colors[1],
-            mouse_callbacks={
-                # "Button1": lazy.spawn("bash -c '~/.config/rofi/scripts/power'")
-                "Button1": lazy.spawn("bash -c 'eww open powermenu'")
-            },
-        ),
-        widget.Sep(linewidth=0, padding=5, background=colors[1]),
-    ]
-    return widgets_list
+widget_defaults = dict(
+    font="JetBrains Mono Nerd Font",
+    fontsize=14,
+    padding=3,
+    foreground=colors["fg"],
+)
+extension_defaults = widget_defaults.copy()
 
-
-widgets_list = init_widgets_list()
-
-# BAR Configuration
 screens = [
     Screen(
         top=bar.Bar(
-            widgets_list,
-            30,
-            background="#232a2e",
-            border_color="#83c092",
-            border_width=[0, 0, 0, 0],
-            margin=[0, 0, 0, 0],
+            [
+                widget.GroupBox(
+                    active=colors["border1"],
+                    # inactive=colors["someting"],
+                    rounded=True,
+                    highlight_color=colors["bg0_h"],
+                    highlight_method="line",
+                    this_current_screen_border=colors["border1"],
+                    other_current_screen_border=colors["border1"],
+                ),
+                widget.TextBox(
+                    text="|",
+                    foreground=colors["fg"],
+                    padding=0,
+                    fontsize=20,
+                ),
+                widget.CurrentLayoutIcon(
+                    custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
+                    padding=2,
+                    scale=0.75,
+                ),
+                widget.CurrentLayout(
+                    foreground=colors["fg"],
+                    padding=5,
+                ),
+                widget.TextBox(
+                    text="|",
+                    foreground=colors["fg"],
+                    padding=0,
+                    fontsize=20,
+                ),
+                widget.Prompt(),
+                widget.WindowName(),
+                widget.Net(
+                    format="Down: {down:.0f}{down_suffix}  Up: {up:.0f}{up_suffix}",
+                ),
+                widget.TextBox(
+                    text="|",
+                    foreground=colors["fg"],
+                    padding=0,
+                    fontsize=20,
+                ),
+                widget.CPU(),
+                widget.TextBox(
+                    text="|",
+                    foreground=colors["fg"],
+                    padding=0,
+                    fontsize=20,
+                ),
+                widget.Volume(
+                    fmt="VOL: {}",
+                ),
+                widget.TextBox(
+                    text="|",
+                    foreground=colors["fg"],
+                    padding=0,
+                    fontsize=20,
+                ),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.TextBox(
+                    text="|",
+                    foreground=colors["fg"],
+                    padding=0,
+                    fontsize=20,
+                ),
+                widget.QuickExit(countdown_format="[ {} s]", default_text="[Exit]"),
+            ],
+            24,
+            # border_width=[2, 0, 2, 0],
+            # border_color=[
+            #     "ff00ff",
+            #     "000000",
+            #     "ff00ff",
+            #     "000000",
+            # ],
+            background=colors["bg0_h"],
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -383,8 +292,6 @@ screens = [
     ),
 ]
 
-
-# EXTRA Configs
 # Drag floating layouts.
 mouse = [
     Drag(
@@ -422,7 +329,7 @@ floating_layout = layout.Floating(
 # Autostart script
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.call([os.path.expanduser("~/.config/qtile/autostart_once.sh")])
+    subprocess.call([os.path.expanduser("~/.config/qtile/autostart.sh")])
 
 
 auto_fullscreen = True

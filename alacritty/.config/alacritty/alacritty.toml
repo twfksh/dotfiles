@@ -1,4 +1,4 @@
-import = [ "~/.config/alacritty/themes/everforest_dark.toml" ]
+import = [ "~/.config/alacritty/themes/gruvbox_material.toml" ]
 
 live_config_reload = true
 
@@ -7,26 +7,26 @@ TERM = "xterm-256color"
 
 [window]
 dynamic_padding = true
-opacity = 0.95
+opacity = 0.8
 
 [font]
 size = 16
 
 [font.normal]
-family = "Iosevka"
+family = "JetBrains Mono Nerd Font"
 style = "Regular"
 
 [font.bold]
-family = "Iosevka"
-style = "Regular"
+family = "JetBrains Mono Nerd Font"
+style = "Bold"
 
 [font.italic]
-family = "Iosevka"
+family = "JetBrains Mono Nerd Font"
 style = "Italic"
 
 [font.bold_italic]
-family = "Iosevka"
-style = "Italic"
+family = "JetBrains Mono Nerd Font"
+style = "Bold Italic"
 
 [scrolling]
 history = 10000
