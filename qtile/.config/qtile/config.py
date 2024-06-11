@@ -3,17 +3,17 @@
 import os
 import subprocess
 
-from colors import gruvbox
+from colors import sonokai_atlantis
 from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-mod, mod1 = "mod4", "alt"
-terminal, browser, file_manager = "alacritty --class alacritty", "brave", "thunar"
+mod = "mod4"
+terminal, browser, file_manager = "alacritty", "brave", "thunar"
 
 
-colors = gruvbox()
+colors = sonokai_atlantis()
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -59,9 +59,16 @@ keys = [
     Key(
         [mod],
         "Return",
-        lazy.spawn(terminal),
+        lazy.spawn(terminal + " --class alacritty"),
         desc="Launch terminal",
     ),
+    Key(
+        [mod, "shift"],
+        "Return",
+        lazy.spawn(terminal + " --class term"),
+        desc="Launch terminal at current window",
+    ),
+    # Key([mod1], "Return", lazy.spawn()),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -177,7 +184,7 @@ for i in groups:
 
 layout_config = dict(
     border_focus=colors["border1"],
-    border_width=2,
+    border_width=1,
     margin=5,
 )
 
@@ -211,7 +218,7 @@ screens = [
             [
                 widget.GroupBox(
                     active=colors["border1"],
-                    # inactive=colors["someting"],
+                    inactive=colors["gray"],
                     rounded=True,
                     highlight_color=colors["bg0_h"],
                     highlight_method="line",
@@ -240,6 +247,7 @@ screens = [
                     fontsize=20,
                 ),
                 widget.Prompt(),
+                widget.Systray(),
                 widget.WindowName(),
                 widget.Net(
                     format="Down: {down:.0f}{down_suffix}  Up: {up:.0f}{up_suffix}",
