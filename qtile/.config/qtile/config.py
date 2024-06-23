@@ -247,8 +247,14 @@ screens = [
                     fontsize=20,
                 ),
                 widget.Prompt(),
-                widget.Systray(),
                 widget.WindowName(),
+                widget.Systray(),
+                widget.TextBox(
+                    text="..",
+                    foreground=colors["fg"],
+                    padding=0,
+                    fontsize=20,
+                ),
                 widget.Net(
                     format="Down: {down:.0f}{down_suffix}  Up: {up:.0f}{up_suffix}",
                 ),
