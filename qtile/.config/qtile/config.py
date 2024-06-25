@@ -129,9 +129,9 @@ for vt in range(1, 8):
     )
 
 groups = [
-    Group("1", label="Term", matches=[Match(wm_class="alacritty")]),
-    Group("2", label="Browser", matches=[Match(wm_class="brave-browser")]),
-    Group("3", label="File Browser", matches=[Match(wm_class="thunar")]),
+    Group("1", label="1"),
+    Group("2", label="2"),
+    Group("3", label="3"),
     Group(
         "4",
         label="4",
@@ -231,6 +231,12 @@ screens = [
                     padding=0,
                     fontsize=20,
                 ),
+                # widget.TextBox(
+                #     text="",
+                #     foreground=colors["fg"],
+                #     padding=0,
+                #     fontsize=20,
+                # ),
                 widget.CurrentLayoutIcon(
                     custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
                     padding=2,
@@ -247,47 +253,44 @@ screens = [
                     fontsize=20,
                 ),
                 widget.Prompt(),
-                widget.WindowName(),
+                widget.WindowName(foreground=colors["border1"]),
                 widget.Systray(),
                 widget.TextBox(
-                    text="..",
+                    text="",
                     foreground=colors["fg"],
                     padding=0,
                     fontsize=20,
                 ),
                 widget.Net(
-                    format="Down: {down:.0f}{down_suffix}  Up: {up:.0f}{up_suffix}",
+                    format="[{down:.0f}{down_suffix}   {up:.0f}{up_suffix}]",
+                    foreground=colors["bg_green"],
+                    # background=colors["orange"],
                 ),
-                widget.TextBox(
-                    text="|",
-                    foreground=colors["fg"],
-                    padding=0,
-                    fontsize=20,
+                widget.CPU(
+                    format="[ {load_percent}%",
+                    foreground=colors["bg_green"],
+                    # background=colors["purple"],
                 ),
-                widget.CPU(),
-                widget.TextBox(
-                    text="|",
-                    foreground=colors["fg"],
-                    padding=0,
-                    fontsize=20,
+                widget.Memory(
+                    format="  {MemUsed: .0f}{mm}]",
+                    foreground=colors["bg_green"],
+                    # background=colors["purple"],
                 ),
                 widget.Volume(
-                    fmt="VOL: {}",
+                    fmt="[󰕾 {}]",
+                    foreground=colors["bg_green"],
+                    # background=colors["blue"],
                 ),
-                widget.TextBox(
-                    text="|",
-                    foreground=colors["fg"],
-                    padding=0,
-                    fontsize=20,
+                widget.Clock(
+                    format="[ %a %d %b %H:%M]",
+                    foreground=colors["bg_green"],
+                    # background=colors["bg_green"],
                 ),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.TextBox(
-                    text="|",
-                    foreground=colors["fg"],
-                    padding=0,
-                    fontsize=20,
+                widget.QuickExit(
+                    countdown_format="[{}]",
+                    default_text="[󰐦]",
+                    foreground=colors["red"],
                 ),
-                widget.QuickExit(countdown_format="[ {} s]", default_text="[Exit]"),
             ],
             24,
             # border_width=[2, 0, 2, 0],
@@ -297,7 +300,7 @@ screens = [
             #     "ff00ff",
             #     "000000",
             # ],
-            background=colors["bg0_h"],
+            background=colors["bg"],
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
