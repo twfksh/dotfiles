@@ -1,13 +1,13 @@
 [global]
     monitor = 0
     follow = keyboard
-    width = 370
-    height = 350
-    offset = 0x19
+    width = 400
+    height = 300
+    offset = 8x32
     padding = 2
     horizontal_padding = 2
-    transparency = 25
-    font = Monospace 12
+    transparency = 0
+    font = JetBrains Mono Nerd Font 12
     format = "<b>%s</b>\n%b"
 
 [urgency_low]
