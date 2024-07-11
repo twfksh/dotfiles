@@ -4,6 +4,8 @@ xset r rate 250 60
 # paired with `Xft.dpi: 144`
 # export GDK_DPI_SCALE=1.4
 
+export PATH="$HOME/.local/bin:$PATH"
+
 if [ -z "${XDG_RUNTIME_DIR}" ]; then
     export XDG_RUNTIME_DIR=/tmp/${USER}-runtime-dir
     if [ ! -d "${XDG_RUNTIME_DIR}" ]; then
@@ -13,7 +15,7 @@ if [ -z "${XDG_RUNTIME_DIR}" ]; then
 fi
 
 picom --config $HOME/.config/picom/picom.conf &
-feh --bg-scale $HOME/wallpapers/halloween.png &
+feh --bg-scale $HOME/wallpapers/crossandthelambs.jpg &
 
 sxhkd -c $HOME/.config/sxhkd/sxhkdrc &
 
