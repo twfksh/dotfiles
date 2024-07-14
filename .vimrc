@@ -9,6 +9,7 @@ set ruler
 set showcmd
 set incsearch
 set shellslash
+set cursorline
 set number
 set relativenumber
 set termguicolors
