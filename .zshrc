@@ -24,3 +24,4 @@ export VI_MODE_ESC_INSERT="jk" && plug "zap-zsh/vim"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 alias configmgr='/usr/bin/git --git-dir=/home/toufiq/config-manager --work-tree=/home/toufiq'
+
