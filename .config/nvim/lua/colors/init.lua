@@ -3,7 +3,9 @@ return {
   dependencies = {
     { 'echasnovski/mini.base16', version = '*' },
     { 'EdenEast/nightfox.nvim' },
-    { "rose-pine/neovim",        name = "rose-pine" },
+    { 'sainnhe/everforest' },
+    { 'rebelot/kanagawa.nvim' },
+    { 'rose-pine/neovim',        name = 'rose-pine' },
     {
       "ricardoraposo/gruvbox-minor.nvim",
       lazy = false,
@@ -17,10 +19,9 @@ return {
       version = false,
       lazy = false,
       priority = 1000, -- make sure to load this before all the other start plugins
-    }
+    },
   },
   config = function()
-    --vim.cmd [[colorscheme rose-pine]]
     vim.cmd [[colorscheme citrus-mist]]
   end,
 }

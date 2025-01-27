@@ -54,9 +54,9 @@ vim.opt.scrolloff = 5
 
 vim.opt.laststatus = 3
 
- --vim.opt.listchars = { eol = '↲' }
- --vim.opt.listchars = 'tab:· ,nbsp:_,trail: ,multispace:· ,eol:↲'
- --vim.opt.listchars = { eol = '↲', tab = '>', space = '>' }
- --vim.opt.listchars = { eol = '↲' }
+-- vim.opt.listchars = { eol = '↲' }
+-- vim.opt.listchars = 'tab:· ,nbsp:_,trail: ,multispace:· ,eol:↲'
+-- vim.opt.listchars = { eol = '↲', tab = '>', space = '>' }
+-- vim.opt.listchars = { eol = '↲' }
 
 vim.opt.shell = '/bin/zsh'
