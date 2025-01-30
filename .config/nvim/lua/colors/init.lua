@@ -22,6 +22,6 @@ return {
     },
   },
   config = function()
-    vim.cmd [[colorscheme citrus-mist]]
+    vim.cmd [[colorscheme gruvbox-minor]]
   end,
 }

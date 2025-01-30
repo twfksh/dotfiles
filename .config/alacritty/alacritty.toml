@@ -11,22 +11,22 @@ dynamic_padding = true
 opacity = 0.8
 
 [font]
-size = 13
+size = 14
 
 [font.normal]
-family = "JetBrains Mono Nerd Font"
+family = "Iosevka NF"
 style = "Regular"
 
 [font.bold]
-family = "JetBrains Mono Nerd Font"
+family = "Iosevka NF"
 style = "Bold"
 
 [font.italic]
-family = "JetBrains Mono Nerd Font"
+family = "Iosevka NF"
 style = "Italic"
 
 [font.bold_italic]
-family = "JetBrains Mono Nerd Font"
+family = "Iosevka"
 style = "Bold Italic"
 
 [scrolling]
