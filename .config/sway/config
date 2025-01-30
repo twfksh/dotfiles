@@ -17,6 +17,9 @@ set $menu wmenu-run
 set $laptop eDP-1
 set $monitor HDMI-A-1
 
+### Font config
+font pango: Iosevka NF 10
+
 ### Output configuration
 #
 output * bg ~/wallpapers/scarlet-eve.png fill
