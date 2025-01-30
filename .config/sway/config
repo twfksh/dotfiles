@@ -19,13 +19,16 @@ set $monitor HDMI-A-1
 
 ### Output configuration
 #
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/wallpapers/scarlet-eve.png fill
 #
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 output $monitor resolution 1920x1080 position 0,0
 output $laptop resolution 1920x1080 position 1920,0
+
+## Scripts
 exec_always ~/.config/sway/output.sh
+exec_always --no-startup-id ~/.config/sway/autotiling
 #
 ### Idle configuration
 #
