@@ -6,6 +6,7 @@ return {
     { 'sainnhe/everforest' },
     { 'rebelot/kanagawa.nvim' },
     { 'rose-pine/neovim',        name = 'rose-pine' },
+    { 'chriskempson/base16-vim' },
     {
       "ricardoraposo/gruvbox-minor.nvim",
       lazy = false,
@@ -22,6 +23,6 @@ return {
     },
   },
   config = function()
-    vim.cmd [[colorscheme gruvbox-minor]]
+    vim.cmd [[colorscheme citrus-mist]]
   end,
 }

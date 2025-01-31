@@ -32,6 +32,12 @@ output $laptop resolution 1920x1080 position 1920,0
 ## Scripts
 exec_always ~/.config/sway/output.sh
 exec_always --no-startup-id ~/.config/sway/autotiling
+
+
+# gaps outer 0
+# gaps inner 0
+hide_edge_borders --i3 smart
+workspace_layout tabbed
 #
 ### Idle configuration
 #
@@ -215,8 +221,8 @@ bar {
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
     colors {
-        statusline #ffffff
         background #323232
+        statusline #ffffff
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
