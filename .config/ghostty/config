@@ -1,0 +1,54 @@
+custom-shader = ./shaders/cursor_blaze_no_trail.glsl
+custom-shader = ./shaders/cursor_smear.glsl
+
+# Fonts
+font-family = "Fira Code"
+font-family-bold = "Fira Code"
+font-family-italic = "Maple Mono"
+font-family-bold-italic = "Maple Mono"
+font-family = "Symbols Nerd Font Mono"
+font-size = 15.25
+adjust-underline-position = 4
+
+# Mouse
+mouse-hide-while-typing = true
+# mouse-scroll-multiplier = 1
+
+# Theme
+# theme = /home/folke/projects/tokyonight.nvim/extras/ghostty/tokyonight_night
+cursor-invert-fg-bg = true
+background-opacity = 0.8
+window-theme = ghostty
+
+# keybindings
+keybind = clear
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:bottom
+keybind = alt+k=goto_split:top
+keybind = alt+l=goto_split:right
+keybind = super+shift+t=new_tab
+keybind = super+shift+h=previous_tab
+keybind = super+shift+l=next_tab
+keybind = super+shift+comma=move_tab:-1
+keybind = super+shift+period=move_tab:1
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+keybind = super+shift+enter=new_split:auto
+keybind = super+shift+i=inspector:toggle
+keybind = super+shift+m=toggle_split_zoom
+keybind = super+shift+r=reload_config
+keybind = super+shift+s=write_screen_file:open
+keybind = super+shift+w=close_surface
+
+# Window
+gtk-single-instance = true
+gtk-tabs-location = bottom
+gtk-wide-tabs = false
+title = Oh, hello
+window-padding-y = 2,0
+window-padding-balance = true
+# window-decoration = false
+
+# Other
+copy-on-select = clipboard
+shell-integration-features = cursor,sudo,no-title
