@@ -3,7 +3,7 @@
 ### Variables
 #
 # Mod1 for alt and Mod4 for logo key
-set $mod Mod1 
+set $mod Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -22,7 +22,7 @@ font pango: Iosevka NF 10
 
 ### Output configuration
 #
-output * bg ~/wallpapers/scarlet-eve.png fill
+output * bg ~/.config/wallpapers/wallhaven-e8ye68.jpg fill
 #
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
