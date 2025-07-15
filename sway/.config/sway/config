@@ -10,7 +10,7 @@ set $down j
 set $up k
 set $right l
 # Preferred terminal emulator
-set $term alacritty
+set $term ghostty
 # Preferred application launcher
 set $menu wmenu-run
 # Laptop output identifier
@@ -18,7 +18,7 @@ set $laptop eDP-1
 set $monitor HDMI-A-1
 
 ### Font config
-font pango: Iosevka NF 10
+font pango: Geist Mono Nerd Font Propo  10
 
 ### Output configuration
 #
@@ -214,7 +214,7 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
+    position bottom
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
