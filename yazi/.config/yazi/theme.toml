@@ -10,6 +10,7 @@
 # : Flavor {{{
 
 [flavor]
+# use = "nightfly"
 dark  = ""
 light = ""
 

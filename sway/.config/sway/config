@@ -10,7 +10,7 @@ set $down j
 set $up k
 set $right l
 # Preferred terminal emulator
-set $term ghostty
+set $term kitty
 # Preferred application launcher
 set $menu wmenu-run
 # Laptop output identifier
@@ -18,7 +18,7 @@ set $laptop eDP-1
 set $monitor HDMI-A-1
 
 ### Font config
-font pango: Geist Mono Nerd Font Propo  10
+font pango: Iosevka 10
 
 ### Output configuration
 #
@@ -69,7 +69,10 @@ exec swayidle -w \
     # Kill focused window
     bindsym $mod+q kill
     # Start your launcher
-    bindsym $mod+d exec $menu
+    # bindsym $mod+d exec $menu
+
+    # Basic keybind to launch wofi (replaces dmenu)
+    bindsym $mod+d exec wofi --show drun
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
