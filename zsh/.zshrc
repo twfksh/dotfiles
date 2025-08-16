@@ -28,7 +28,8 @@ export PATH=$PATH:~/.cargo/bin
 alias configmgr='/usr/bin/git --git-dir=/home/toufiq/config-manager --work-tree=/home/toufiq'
 
 # for go lang binaries
-export PATH=$HOME/go/bin:$PATH
+# export PATH=$HOME/go/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
