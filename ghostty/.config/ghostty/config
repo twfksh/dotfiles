@@ -1,20 +1,17 @@
 # Fonts
-font-family = "Fira Code"
-font-family-bold = "Fira Code"
+font-family = "JetBrainsMono Nerd Font"
+font-family-bold = "JetBrainsMono Nerd Font"
 font-family-italic = "Maple Mono"
 font-family-bold-italic = "Maple Mono"
 font-family = "Symbols Nerd Font Mono"
-font-size = 15.5
+font-size = 12.5
 adjust-underline-position = 4
 
 # Mouse
 mouse-hide-while-typing = true
-# mouse-scroll-multiplier = 1
 
-# Theme
-# theme = /home/folke/projects/tokyonight.nvim/extras/ghostty/tokyonight_night
 cursor-invert-fg-bg = true
-# background-opacity = 0.8
+background-opacity = 0.9
 window-theme = ghostty
 
 # keybindings
@@ -47,9 +44,10 @@ gtk-single-instance = true
 gtk-tabs-location = bottom
 gtk-wide-tabs = false
 title = 👻 Ghostty
-window-padding-y = 2,0
 window-padding-balance = true
 # window-decoration = false
+window-width = 100
+window-height = 28
 
 # Other
 copy-on-select = true
