@@ -1,10 +1,24 @@
+# Window
+gtk-single-instance = true
+gtk-titlebar-style = tabs
+#gtk-wide-tabs = false
+#title = 👻 Ghostty
+window-subtitle = working-directory
+window-padding-balance = true
+#window-decoration = false
+window-width = 100
+window-height = 28
+
+# Shaders
+custom-shader = ./shaders/cursor_smear.glsl
+
 # Fonts
 font-family = "JetBrainsMono Nerd Font"
 font-family-bold = "JetBrainsMono Nerd Font"
-font-family-italic = "Maple Mono"
-font-family-bold-italic = "Maple Mono"
+font-family-italic = "Maple Mono NF"
+font-family-bold-italic = "Maple NF"
 font-family = "Symbols Nerd Font Mono"
-font-size = 12.5
+font-size = 13
 adjust-underline-position = 4
 
 # Mouse
@@ -13,17 +27,21 @@ mouse-hide-while-typing = true
 cursor-invert-fg-bg = true
 background-opacity = 0.9
 window-theme = ghostty
+theme = Everforest Dark Hard
 
 # keybindings
 keybind = clear
+
+keybind = alt+t=new_tab
+keybind = alt+shift+enter=new_split:auto
+
+keybind = alt+h=previous_tab
+keybind = alt+l=next_tab
+
 keybind = alt+shift+h=goto_split:left
 keybind = alt+shift+j=goto_split:bottom
 keybind = alt+shift+k=goto_split:top
 keybind = alt+shift+l=goto_split:right
-
-keybind = alt+t=new_tab
-keybind = alt+h=previous_tab
-keybind = alt+l=next_tab
 
 keybind = alt+shift+comma=move_tab:-1
 keybind = alt+shift+period=move_tab:1
@@ -31,7 +49,6 @@ keybind = alt+shift+period=move_tab:1
 keybind = ctrl+shift+c=copy_to_clipboard
 keybind = ctrl+shift+v=paste_from_clipboard
 
-keybind = super+shift+enter=new_split:auto
 keybind = super+shift+i=inspector:toggle
 keybind = super+shift+r=reload_config
 keybind = super+shift+s=write_screen_file:open
@@ -39,21 +56,8 @@ keybind = alt+shift+w=close_surface
 
 keybind = ctrl+shift+p=toggle_command_palette
 
-# Window
-gtk-single-instance = true
-gtk-tabs-location = bottom
-gtk-wide-tabs = false
-title = 👻 Ghostty
-window-padding-balance = true
-# window-decoration = false
-window-width = 100
-window-height = 28
-
 # Other
 copy-on-select = true
 selection-clear-on-copy = true
 shell-integration-features = cursor,sudo,no-title
-
-# Shaders
-custom-shader = ./shaders/cursor_smear.glsl
 

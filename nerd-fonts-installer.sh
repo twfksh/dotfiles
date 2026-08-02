@@ -41,12 +41,12 @@ declare -a fonts=(
 	# AurulentSansMono
 	# BigBlueTerminal
 	# BitstreamVeraSansMono
-	CascadiaCode
-	CascadiaMono
+	# CascadiaCode
+	# CascadiaMono
 	# CodeNewRoman
 	# ComicShannsMono
 	# CommitMono
-	Cousine
+	# Cousine
 	# D2Coding
 	# DaddyTimeMono
 	# DejaVuSansMono
@@ -56,19 +56,19 @@ declare -a fonts=(
 	# FantasqueSansMono
 	FiraCode
 	FiraMono
-	# GeistMono
+	GeistMono
 	# Go-Mono
 	# Gohu
-	Hack
-	Hasklig
+	# Hack
+	# Hasklig
 	# HeavyData
 	# Hermit
-	# IBMPlexMono
+	IBMPlexMono
 	# Inconsolata
 	# InconsolataGo
 	# InconsolataLGC
 	# IntelOneMono
-	# Iosevka
+	Iosevka
 	# IosevkaTerm
 	# IosevkaTermSlab
 	JetBrainsMono
@@ -77,11 +77,11 @@ declare -a fonts=(
 	# Lilex
 	# MPlus
 	# MartianMono
-	Meslo
-	Monaspace
-	Monofur
-	Monoid
-	Mononoki
+	# Meslo
+	# Monaspace
+	# Monofur
+	# Monoid
+	# Mononoki
 	# NerdFontsSymbolsOnly
 	# Noto
 	# OpenDyslexic
@@ -90,17 +90,17 @@ declare -a fonts=(
 	# ProggyClean
 	# Recursive
 	RobotoMono
-	ShareTechMono
+	# ShareTechMono
 	SourceCodePro
-	SpaceMono
-	Terminus
-	Tinos
+	# SpaceMono
+	# Terminus
+	# Tinos
 	Ubuntu
 	UbuntuMono
 	UbuntuSans
-	VictorMono
+	# VictorMono
 	ZedMono
-	iA-Writer
+	# iA-Writer
 )
 
 if [[ ! -d "$fonts_dir" ]]; then
